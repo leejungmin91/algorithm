@@ -8,7 +8,7 @@ import java.util.*;
 public class WeightGraph {
 
     static List<List<Edge>> list = new ArrayList<>();
-    static String path = "0";
+    static Stack<Edge> stack = new Stack<>();
     static Set<String> visited;
     static List<Integer> answerList = new ArrayList<>();
     static int K;
@@ -38,46 +38,52 @@ public class WeightGraph {
             }
         }
 
-        dfs(0, 0);
+        // 처음 노드 stack에 초기화
+        stack.add(new Edge(0,0));
+
+        dfs(0);
 
         answerList.forEach(ans-> System.out.println("answer ==> "+ans));
     }
 
     static String path2 = "0";
 
-    static void dfs(int curNode, int curDist){
+    static void dfs(int curNode){
+
+        System.out.println("현재 Node ==> "+curNode);
+        int dist = stack.stream().mapToInt(s-> s.weight).sum();
+        System.out.println("현재 현재까지 이동거리 ==> "+dist);
 
         for(int i=0; i<list.get(curNode).size(); i++){
             int nextNode = list.get(curNode).get(i).node;
             int weight = list.get(curNode).get(i).weight;
 
-            if(curDist+weight >= 17){
+            if(dist >= 17){
                 // 17보다 크거나 같으면 더이상 갈 필요가 없음.
                 // 다음노드는 i+1로 가면 됨.
-                if(curDist+weight == 17){
-                    System.out.println("경로 !!!! :: "+path2);
+                if(dist == 17){
                     answerList.add(nextNode);
                 }
-                System.out.println("경로 :: "+path2);
-            }else{
-                path2 += nextNode;
-                dfs(nextNode, curDist+weight);
-            }
-            /*if(visited.contains(nextPath)){
+
+                stack.pop();
+
                 continue;
-            }*/
+            }
 
-            //path = nextPath;
-
-            /*if(curDist+weight < 17){
-                dfs(nextNode, curDist+weight);
-            }else{
-                if(curDist+weight == 17) answerList.add(nextNode);
-                visited.add(path);
-                path = "0";
-                dfs(0,0);
-            }*/
+            // stack 에 다음 노드를 넣음.
+            stack.push(list.get(nextNode).get(i));
+            // 다음노드를 호출
+            dfs(nextNode);
         }
+
+        // stack에 마지막값을 돌음..
+        // stack 한번 pop
+        stack.pop();
+
+        // 현재노드와 이어진 다음 노드가 있는가? (이미 방문했으면 그 다음노드)
+        Edge peekEdge = stack.peek();
+        List<Edge> linkedCurEdge = list.get(peekEdge.node);
+
     }
 
 }
@@ -93,5 +99,11 @@ class Edge {
 
     public String toString(){
         return "weight :: "+this.weight+" / Node :: "+this.node;
+    }
+}
+
+class Singleton{
+    private Singleton(){
+
     }
 }

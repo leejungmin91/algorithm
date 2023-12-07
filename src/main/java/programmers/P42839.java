@@ -13,7 +13,7 @@ public class P42839 {
 
         String[] stra = numbers.split("");
         int[] arr = new int[numbers.length()];
-//
+////
         for(int i=0; i< stra.length; i++){
             arr[i] = Integer.parseInt(stra[i]);
         }

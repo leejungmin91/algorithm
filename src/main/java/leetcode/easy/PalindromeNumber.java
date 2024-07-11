@@ -2,7 +2,7 @@ package leetcode.easy;
 
 import java.io.IOException;
 
-public class palindromeNumber {
+public class PalindromeNumber {
 
     public static void main(String[] args) throws IOException {
         System.out.println(solution(0));

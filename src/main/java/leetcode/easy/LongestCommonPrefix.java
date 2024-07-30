@@ -9,47 +9,33 @@ public class LongestCommonPrefix {
 
     public static void main(String[] args) throws IOException {
         // strs = ["flower","flow","flight"] -> "fl"
-        // LVIII -> 58
-        // MCMXCIV -> 1994
-        List<String> strs = List.of("kaflower","kbflow","kcflight");
+        String[] strs = {"flower", "fkow"};
         System.out.println(solution(strs));
     }
 
-    public static String solution(List<String> strs) {
-        String[] arr1 = strs.get(0).split("");
-        String[] arr2 = strs.get(1).split("");
-        String[] arr3 = strs.get(2).split("");
+    public static String solution(String[] strs) {
 
-        int size = Math.min(Math.min(arr1.length, arr2.length), arr3.length);
+        /**
+         *  1. kaflower, kbflow, kcflight -> k
+         *  2. for 문을 돌려서 첫번째 문자부터 같은지 확인을 함.
+         */
 
-        List<String> resultList = new ArrayList<>();
-        String result = "";
-
-        for(int i=0; i<size; i++) {
-            if(arr1[i].equals(arr2[i]) && arr1[i].equals(arr3[i])) {
-                result += arr1[i];
-            } else {
-                result += "&";
-            }
+        int size = strs[0].length();
+        for(String str : strs) {
+            size = Math.min(size, str.length());
         }
 
-        // k&fl&&
-
-        String[] splitResult = result.split("&");
-        int maxLength = 0;
-        int index = 0;
-        for(int i=0; i<splitResult.length; i++) {
-            if(maxLength < splitResult[i].length()) {
-                maxLength = splitResult[i].length();
-                index = i;
+        StringBuilder prefix = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            char currentChar = strs[0].charAt(i);
+            for (int j = 1; j < strs.length; j++) {
+                if (strs[j].charAt(i) != currentChar) {
+                    return prefix.toString();
+                }
             }
+            prefix.append(currentChar);
         }
 
-        String res = splitResult[index];
-
-        System.out.println(res);
-
-        return null;
-        //return result;
+        return prefix.toString();
     }
 }

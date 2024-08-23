@@ -14,7 +14,12 @@ public class SparseArrays {
 
     public static List<Integer> matchingStrings(List<String> stringList, List<String> queries) {
         //return stringList.stream().map(str -> (int) queries.stream().filter(q -> q.equals(str)).count()).collect(Collectors.toList());
-        return queries.stream().map(q -> (int) stringList.stream().filter(s -> s.equals(q)).count()).collect(Collectors.toList());
+        return queries.stream()
+                .map(q -> (int) stringList.stream()
+                        .filter(s -> s.equals(q))
+                        .count()
+                )
+                .collect(Collectors.toList());
     }
 
 }

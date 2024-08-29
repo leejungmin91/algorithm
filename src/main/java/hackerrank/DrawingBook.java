@@ -5,8 +5,6 @@ import java.util.List;
 
 public class DrawingBook {
 
-    static int[][] book;
-
     public static void main(String[] args) {
         System.out.println(pageCount(7,4));
     }

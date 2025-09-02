@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class B1260 {
     private static final List<List<Integer>> graph = new ArrayList<>();
@@ -42,6 +44,10 @@ public class B1260 {
         System.out.println();
         visited = new int[N+2];
         bfs(V);
+
+        String s = "";
+        List<Integer> a = Arrays.stream(s.split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+        a.sort(Comparator.comparingInt(o -> o));
     }
 
     public static void dfs(int node) {

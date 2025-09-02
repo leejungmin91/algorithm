@@ -44,10 +44,6 @@ public class B1260 {
         System.out.println();
         visited = new int[N+2];
         bfs(V);
-
-        String s = "";
-        List<Integer> a = Arrays.stream(s.split(" ")).map(Integer::parseInt).collect(Collectors.toList());
-        a.sort(Comparator.comparingInt(o -> o));
     }
 
     public static void dfs(int node) {

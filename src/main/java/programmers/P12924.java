@@ -5,7 +5,7 @@ public class P12924 {
     public int solution(int n) {
 
         int cnt = 0;
-        for(int i=1; i<=n/2+2; i++){
+        for(int i=1; i<=n/2; i++){
             if(sum(i, n)) cnt++;
         }
 
@@ -16,7 +16,7 @@ public class P12924 {
 
     public boolean sum(int start, int n) {
         int sum = 0;
-        for(int i=start; i<=n/2+2; i++){
+        for(int i=start; i<=n/2; i++){
             if(sum >= n) {
                 return sum == n;
             }
